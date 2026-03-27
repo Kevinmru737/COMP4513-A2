@@ -1,0 +1,124 @@
+import { useEffect, useContext } from "react";
+import { AboutContext } from "../../contexts/AboutContext";
+const AboutView = (props) => {
+  const [aboutOpen, setAboutOpen] = useContext(AboutContext);
+
+  if (!aboutOpen) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+      <div className="bg-gray-800 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto text-white">
+        <div className="sticky top-0 bg-gray-800 border-b border-gray-700 p-6 flex justify-between items-center">
+          <h1 className="text-3xl font-bold">About Mein Songs</h1>
+          <button
+            onClick={() => setAboutOpen(false)}
+            className="text-gray-400 hover:text-white text-2xl cursor-pointer"
+          >
+            ✕
+          </button>
+        </div>
+
+        <div className="p-6 space-y-8">
+          <section>
+            <h2 className="text-2xl font-bold mb-3">Project Overview</h2>
+            <p className="text-gray-300 leading-relaxed">
+              Mein Songs is a single-page React application designed to explore
+              and discover music across different artists, genres, and songs.
+              Built with modern web technologies, this application demonstrates
+              full-stack development capabilities including frontend design, API
+              integration, and user authentication.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold mb-3">Features</h2>
+            <ul className="text-gray-300 space-y-2">
+              <li>
+                • <strong>Browse Artists:</strong> Explore a curated collection
+                of musicians and performers
+              </li>
+              <li>
+                • <strong>Discover Genres:</strong> Filter music by genre to
+                find your favorite styles
+              </li>
+              <li>
+                • <strong>Song Library:</strong> Access detailed information
+                about individual songs
+              </li>
+              <li>
+                • <strong>Personal Playlists:</strong> Create and manage your
+                custom playlists (when logged in)
+              </li>
+              <li>
+                • <strong>User Authentication:</strong> Secure login system for
+                personalized experiences
+              </li>
+              <li>
+                • <strong>Responsive Design:</strong> Optimized for desktop and
+                mobile devices
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold mb-3">Technology Stack</h2>
+            <ul className="text-gray-300 space-y-2">
+              <li>
+                • <strong>Frontend:</strong> React with Vite
+              </li>
+              <li>
+                • <strong>Styling:</strong> Tailwind CSS
+              </li>
+              <li>
+                • <strong>Routing:</strong> React Router DOM
+              </li>
+              <li>
+                • <strong>Database:</strong> Supabase
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold mb-3">Attribution</h2>
+            <p className="text-gray-300 mb-3">
+              This project uses external resources and libraries. All
+              third-party code is properly credited and licensed according to
+              their respective terms.
+            </p>
+            <ul className="text-gray-300 space-y-2">
+              <li>
+                • React -{" "}
+                <a
+                  href="https://react.dev"
+                  className="text-blue-400 hover:text-blue-300"
+                >
+                  https://react.dev
+                </a>
+              </li>
+              <li>
+                • Tailwind CSS -{" "}
+                <a
+                  href="https://tailwindcss.com"
+                  className="text-blue-400 hover:text-blue-300"
+                >
+                  https://tailwindcss.com
+                </a>
+              </li>
+              <li>
+                • Vite -{" "}
+                <a
+                  href="https://vitejs.dev"
+                  className="text-blue-400 hover:text-blue-300"
+                >
+                  https://vitejs.dev
+                </a>
+              </li>
+            </ul>
+          </section>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AboutView;

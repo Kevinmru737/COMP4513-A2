@@ -1,7 +1,10 @@
 // src/pages/Login.jsx
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { LoginContext } from "../../contexts/LoginContextProvider";
 
-const Login = ({ setLoggedIn }) => {
+const LoginFormView = (props) => {
+  const [loggedIn, setLoggedIn] = useContext(LoginContext);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -48,4 +51,4 @@ const Login = ({ setLoggedIn }) => {
   );
 };
 
-export default Login;
+export default LoginFormView;

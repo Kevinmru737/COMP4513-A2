@@ -3,9 +3,9 @@
 //img from https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=1200&h=800&fit=crop
 import loginBg from "../assets/dj-techno-bg.jfif";
 
-const LoginPrompt = () => {
+const LoginPrompt = (props) => {
   return (
-    <div className="h-screen bg-cover bg-center flex items-center justify-center px-4 relative">
+    <div className="min-h-screen bg-black h-screen bg-cover bg-center flex items-center justify-center px-4 relative">
       {/* Dark overlay for text readability */}
       <div
         className="absolute inset-0 bg-cover bg-opacity-40"

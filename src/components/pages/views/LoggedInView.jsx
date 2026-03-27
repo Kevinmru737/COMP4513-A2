@@ -1,7 +1,7 @@
 import loginBg from "../../../assets/dj-techno-bg.jfif";
 const LoggedInHome = (props) => {
   return (
-    <div className="h-screen bg-cover bg-center flex items-center justify-center px-4 relative">
+    <div className="min-h-screen bg-black h-screen bg-cover bg-center flex items-center justify-center px-4 relative">
       {/* Dark overlay for text readability */}
       <div
         className="absolute inset-0 bg-cover bg-opacity-40"
