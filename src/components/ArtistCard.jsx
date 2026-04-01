@@ -1,6 +1,15 @@
+import { Link } from "react-router-dom";
+import { FilterContext } from "./contexts/FilterContext";
+import { useContext } from "react";
+
 const ArtistCard = ({ artist }) => {
+  const { toggleFilter, applyFilter } = useContext(FilterContext);
   return (
-    <div className="bg-gray-800 rounded-lg overflow-hidden hover:transform hover:scale-105 transition-transform duration-300">
+    <Link
+      to="/songs"
+      onClick={() => toggleFilter("artists", artist.artist_name)}
+      className="bg-gray-800 rounded-lg shadow-xl/15 overflow-hidden will-change-transform transform-gpu hover:scale-105 duration-300"
+    >
       <div className="h-48 overflow-hidden bg-gray-700">
         <img
           src={artist.artist_image_url}
@@ -18,7 +27,7 @@ const ArtistCard = ({ artist }) => {
           {artist.spotify_desc}
         </p>
       </div>
-    </div>
+    </Link>
   );
 };
 

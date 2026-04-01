@@ -1,11 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Spinner } from "@heroui/react";
 import GenreCard from "../../GenreCard";
-import ArtistBanner from "../../ArtistBanner";
+import ArtistBanner from "../../banners/ArtistBanner.jsx";
 import supabase from "../../../supabase.js";
-
+import { DataContext } from "../../contexts/DataContext.jsx";
+import AmbientBackground from "../../AmbientBackground.jsx";
 const GenreView = () => {
-  const [genres, setGenres] = useState([]);
+  const { genreData, setGenreData } = useContext(DataContext);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -15,52 +16,60 @@ const GenreView = () => {
   }, []);
 
   const fetchGenres = async () => {
-    try {
-      setLoading(true);
-      const { data, error: supabaseError } = await supabase
-        .from("genres")
-        .select("*");
+    // Only fetch the data once
+    if (genreData.length === 0) {
+      try {
+        setLoading(true);
+        const { data, error: supabaseError } = await supabase
+          .from("genres")
+          .select("*");
 
-      if (supabaseError) {
-        throw new Error(supabaseError.message);
+        if (supabaseError) {
+          throw new Error(supabaseError.message);
+        }
+
+        setGenreData(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
       }
-
-      setGenres(data);
-    } catch (err) {
-      setError(err.message);
-    } finally {
+    } else {
       setLoading(false);
     }
   };
 
   return (
     <div className="min-h-screen bg-black py-8">
-      <ArtistBanner />
-      {/* Content */}
-      <div className="max-w-6xl mx-auto py-8">
-        {loading && (
-          <div className="flex items-center gap-4 justify-center py-12">
-            <Spinner className="scale-300" size="xl" color="accent" />
-          </div>
-        )}
+      <AmbientBackground></AmbientBackground>
+      <div className="max-w-6xl mx-auto p-6 bg-linear-to-r/decreasing from-gray-500 from-20% to-gray-700 rounded-2xl relative z-10">
+        <ArtistBanner />
+        {/* Content */}
+        <div className="max-w-6xl mx-auto py-8">
+          {loading && (
+            <div className="flex items-center gap-4 justify-center py-12 text-gray-500">
+              <Spinner className="scale-300" size="xl" color="current" />
+            </div>
+          )}
 
-        {error && (
-          <div className="text-center py-8">
-            <p className="text-red-400 text-xl">Error: {error}</p>
-          </div>
-        )}
+          {error && (
+            <div className="text-center py-8">
+              <p className="text-red-400 text-xl">Error: {error}</p>
+            </div>
+          )}
 
-        {!loading && !error && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-6">
-            {genres.map((genre) => (
-              <GenreCard key={genre.genre_id} genre={genre} />
-            ))}
-          </div>
-        )}
+          {!loading && !error && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-6">
+              {genreData.map((genre) => (
+                <GenreCard key={genre.genre_id} genre={genre} />
+              ))}
+            </div>
+          )}
 
-        {!loading && !error && genres.length === 0 && (
-          <p className="text-gray-400 text-xl">No Genres found</p>
-        )}
+          {!loading && !error && genreData.length === 0 && (
+            <p className="text-gray-400 text-xl">No Genres found</p>
+          )}
+        </div>
       </div>
     </div>
   );

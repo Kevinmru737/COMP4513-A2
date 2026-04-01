@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
-
+import { AboutContext } from "./contexts/AboutContext.jsx";
+import { useContext } from "react";
 const Footer = (props) => {
+  const { setAboutOpen } = useContext(AboutContext);
   const currentYear = new Date().getFullYear();
 
   return (
     <footer className="bg-black border-t-4 border-2 border-gray-900 py-12">
       <div className="max-w-6xl mx-auto px-8">
-        {/* Top section: Links */}
         <div className="flex justify-around mb-8">
           <div>
             <h3 className="text-white font-bold mb-4">Navigation</h3>
@@ -17,12 +18,12 @@ const Footer = (props) => {
               >
                 Home
               </Link>
-              <Link
-                to="/about"
-                className="text-gray-400 hover:text-yellow-300 block"
+              <button
+                className="text-gray-400 hover:text-yellow-300 block cursor-pointer"
+                onClick={() => setAboutOpen(true)}
               >
                 About
-              </Link>
+              </button>
             </nav>
           </div>
 
@@ -45,27 +46,8 @@ const Footer = (props) => {
               </a>
             </nav>
           </div>
-
-          {/*<div>
-            <h3 className="text-white font-bold mb-4">Legal</h3>
-            <nav className="space-y-2">
-              <a
-                href="#privacy"
-                className="text-gray-400 hover:text-yellow-300 block"
-              >
-                Privacy Policy
-              </a>
-              <a
-                href="#terms"
-                className="text-gray-400 hover:text-yellow-300 block"
-              >
-                Terms of Service
-              </a>
-            </nav>
-          </div>*/}
         </div>
 
-        {/* Bottom section: Copyright */}
         <div className="text-center text-gray-400">
           <p>&copy; {currentYear} Mein Songs. All rights reserved.</p>
           <p className="text-sm mt-2">

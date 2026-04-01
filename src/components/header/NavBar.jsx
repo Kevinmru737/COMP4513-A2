@@ -6,7 +6,7 @@ import { AboutContext } from "../contexts/AboutContext.jsx";
 
 const NavBar = (props) => {
   const [loggedIn, setLoggedIn] = useContext(LoginContext);
-  const [aboutOpen, setAboutOpen] = useContext(AboutContext);
+  const { setAboutOpen } = useContext(AboutContext);
 
   return (
     <nav className="flex gap-18 flex-1 justify-center">

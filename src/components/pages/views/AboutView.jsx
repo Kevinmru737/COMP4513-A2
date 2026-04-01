@@ -1,12 +1,30 @@
 import { useEffect, useContext } from "react";
 import { AboutContext } from "../../contexts/AboutContext";
 const AboutView = (props) => {
-  const [aboutOpen, setAboutOpen] = useContext(AboutContext);
+  const { aboutOpen, setAboutOpen } = useContext(AboutContext);
+
+  useEffect(() => {
+    if (aboutOpen) {
+      // This padding right idea is from claude.ai (to fix the issue of window size changing from scroll bar being hidden)
+      const scrollbarWidth =
+        window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.overflow = "hidden";
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+    } else {
+      document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
+    };
+  }, [aboutOpen]);
 
   if (!aboutOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
       <div className="bg-gray-800 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto text-white">
         <div className="sticky top-0 bg-gray-800 border-b border-gray-700 p-6 flex justify-between items-center">
           <h1 className="text-3xl font-bold">About Mein Songs</h1>

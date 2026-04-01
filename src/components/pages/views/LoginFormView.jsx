@@ -14,7 +14,7 @@ const LoginFormView = (props) => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gray-900 flex items-center justify-center relative z-10 px-4">
       <div className="bg-gray-800 p-12 rounded-lg shadow-2xl w-full max-w-md">
         <h2 className="text-3xl font-bold text-white mb-8 text-center">
           Login
