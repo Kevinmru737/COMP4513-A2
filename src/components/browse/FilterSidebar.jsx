@@ -18,7 +18,7 @@ const FilterSidebar = (props) => {
     filters.artists.length > 0;
 
   return (
-    <div className="bg-gray-800 rounded-lg p-6 sticky top-20">
+    <div className="bg-gray-800 rounded-lg p-6 sticky top-30">
       <h2 className="text-2xl font-bold text-white mb-6">Filters</h2>
       {/* Title Search */}
       <div className="mb-8">
@@ -37,7 +37,7 @@ const FilterSidebar = (props) => {
       {/* Years */}
       <div className="mb-8">
         <label className="block text-white font-bold mb-3">Years</label>
-        <div className="space-y-2 max-h-48 overflow-y-auto">
+        <div className="space-y-2 max-h-32 overflow-y-auto">
           {availableYears.map((year) => (
             <div key={year}>
               <label className="flex items-center cursor-pointer">
@@ -65,7 +65,7 @@ const FilterSidebar = (props) => {
       {/* Genres */}
       <div className="mb-8">
         <label className="block text-white font-bold mb-3">Genres</label>
-        <div className="space-y-2 max-h-48 overflow-y-auto">
+        <div className="space-y-2 max-h-32 overflow-y-auto">
           {availableGenres.map((genre) => (
             <div key={genre}>
               <label className="flex items-center cursor-pointer">

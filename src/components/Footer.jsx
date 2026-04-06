@@ -14,12 +14,12 @@ const Footer = (props) => {
             <nav className="space-y-2">
               <Link
                 to="/"
-                className="text-gray-400 hover:text-yellow-300 block"
+                className="text-gray-400 hover:text-orange-300 block"
               >
                 Home
               </Link>
               <button
-                className="text-gray-400 hover:text-yellow-300 block cursor-pointer"
+                className="text-gray-400 hover:text-orange-300 block cursor-pointer"
                 onClick={() => setAboutOpen(true)}
               >
                 About
@@ -34,13 +34,13 @@ const Footer = (props) => {
                 href="https://github.com/Kevinmru737"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-yellow-300 block"
+                className="text-gray-400 hover:text-orange-300 block"
               >
                 GitHub
               </a>
               <a
                 href="mailto:koh705@mtroyal.ca"
-                className="text-gray-400 hover:text-yellow-300 block"
+                className="text-gray-400 hover:text-orange-300 block"
               >
                 Contact
               </a>

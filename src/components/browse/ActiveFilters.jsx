@@ -23,7 +23,7 @@ const ActiveFilters = (props) => {
   }
 
   return (
-    <div className="flex justify-between items-center mb-6 p-4 bg-gray-700 rounded-lg">
+    <div className="flex justify-between items-center sticky top-30 mb-6 p-4 bg-gray-700 rounded-lg">
       <div>
         <h3 className="text-white font-bold mb-3">Active Filters:</h3>
 

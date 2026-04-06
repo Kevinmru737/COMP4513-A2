@@ -15,6 +15,7 @@ import LoginContextProvider from "./components/contexts/LoginContextProvider.jsx
 import AboutContextProvider from "./components/contexts/AboutContext.jsx";
 import DataContextProvider from "./components/contexts/DataContext.jsx";
 import FilterContextProvider from "./components/contexts/FilterContext.jsx";
+import SingleSongView from "./components/pages/views/SingleSongView.jsx";
 // inside your JSX, before <Header />
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/login" element={<LoginFormView />} />
                 <Route path="/songs" element={<BrowseView />} />
+                <Route path="/songs/:songId" element={<SingleSongView />} />
                 <Route path="/genres" element={<GenreView />} />
                 <Route path="/artists" element={<ArtistView />} />
                 <Route path="/playlist" element={<PlaylistView />} />

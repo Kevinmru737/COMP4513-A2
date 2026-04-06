@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { Spinner } from "@heroui/react";
 import GenreCard from "../../GenreCard";
-import ArtistBanner from "../../banners/ArtistBanner.jsx";
+import GenreBanner from "../../banners/GenreBanner.jsx";
 import supabase from "../../../supabase.js";
 import { DataContext } from "../../contexts/DataContext.jsx";
 import AmbientBackground from "../../AmbientBackground.jsx";
@@ -42,8 +42,8 @@ const GenreView = () => {
   return (
     <div className="min-h-screen bg-black py-8">
       <AmbientBackground></AmbientBackground>
-      <div className="max-w-6xl mx-auto p-6 bg-linear-to-r/decreasing from-gray-500 from-20% to-gray-700 rounded-2xl relative z-10">
-        <ArtistBanner />
+      <div className="relative z-10">
+        <GenreBanner />
         {/* Content */}
         <div className="max-w-6xl mx-auto py-8">
           {loading && (

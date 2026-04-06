@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { PlusCircle } from "lucide-react";
+import { Link } from "react-router-dom";
 import { FilterContext } from "../contexts/FilterContext";
 
 const SongCard = (props) => {
@@ -19,7 +20,12 @@ const SongCard = (props) => {
               {/* Title + Artist stacked */}
               <div className="flex flex-col min-w-0 w-1/4">
                 <h3 className="text-white font-bold text-lg truncate">
-                  {song.title}
+                  <Link
+                    to={`/songs/${song.song_id}`}
+                    className="hover:underline mb-2"
+                  >
+                    {song.title}
+                  </Link>
                 </h3>
                 <p className="text-gray-400 text-sm">
                   <span className="text-gray-200 italic">

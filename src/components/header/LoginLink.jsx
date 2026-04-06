@@ -6,15 +6,16 @@ const LoginLink = (props) => {
   const [loggedIn, setLoggedIn] = useContext(LoginContext);
   return loggedIn ? (
     <Link
-      to="/login"
-      className="text-white hover:text-yellow-300 font-semibold transition-colors duration-300"
+      to="/"
+      onClick={() => setLoggedIn(false)}
+      className="text-white hover:text-orange-300 font-semibold transition-colors duration-300"
     >
-      Hi User!
+      Log Out
     </Link>
   ) : (
     <Link
       to="/login"
-      className="text-white hover:text-yellow-300 font-semibold transition-colors duration-300"
+      className="text-white hover:text-orange-300 font-semibold transition-colors duration-300"
     >
       Login
     </Link>

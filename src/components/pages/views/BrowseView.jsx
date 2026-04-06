@@ -2,7 +2,6 @@ import { useState, useEffect, useContext } from "react";
 import { Spinner } from "@heroui/react";
 import { DataContext } from "../../contexts/DataContext";
 import supabase from "../../../supabase.js";
-import ArtistBanner from "../../banners/ArtistBanner.jsx";
 import SongCard from "../../browse/SongCard.jsx";
 import FilterSidebar from "../../browse/FilterSidebar.jsx";
 import ActiveFilters from "../../browse/ActiveFilters.jsx";
@@ -29,7 +28,6 @@ const BrowseView = () => {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-    console.log("3. BrowseView mounted, filters:", filters);
     fetchData();
     // Clean up the filters when the user clicks away
     //return () => clearAllFilters();
@@ -80,7 +78,6 @@ const BrowseView = () => {
             ),
           ].sort(),
         );
-        console.log("4. about to applyFilters, filters:", filters);
         applyFilters(songsRes.data, filters);
       } else {
         setAvailableYears(
@@ -102,7 +99,6 @@ const BrowseView = () => {
             ),
           ].sort(),
         );
-        console.log("4. about to applyFilters, filters:", filters);
         applyFilters(songData, filters);
       }
     } catch (err) {
@@ -118,9 +114,7 @@ const BrowseView = () => {
     <div className="min-h-screen bg-black py-8">
       {/* Main Content */}
       <AmbientBackground />
-      <div className="max-w-6xl mx-auto p-6 relative z-10">
-        <ArtistBanner />
-
+      <div className="max-w-6xl mx-auto relative z-10">
         {/* Spinner/Loader */}
         <div className="max-w-6xl mx-auto py-8">
           {loading && (

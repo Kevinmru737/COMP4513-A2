@@ -12,30 +12,30 @@ const NavBar = (props) => {
     <nav className="flex gap-18 flex-1 justify-center">
       <Link
         to="/"
-        className="text-white hover:text-yellow-300 font-semibold transition-colors duration-300"
+        className="text-white hover:text-orange-300 font-semibold transition-colors duration-300"
       >
         Home
       </Link>
       <Link
         to="/artists"
-        className="text-white hover:text-yellow-300 font-semibold transition-colors duration-300"
+        className="text-white hover:text-orange-300 font-semibold transition-colors duration-300"
       >
         Artists
       </Link>
       <Link
         to="/genres"
-        className="text-white hover:text-yellow-300 font-semibold transition-colors duration-300"
+        className="text-white hover:text-orange-300 font-semibold transition-colors duration-300"
       >
         Genres
       </Link>
       <Link
         to="/songs"
-        className="text-white hover:text-yellow-300 font-semibold transition-colors duration-300"
+        className="text-white hover:text-orange-300 font-semibold transition-colors duration-300"
       >
         Songs
       </Link>
       <button
-        className="text-white hover:text-yellow-300 cursor-pointer font-semibold transition-colors duration-300"
+        className="text-white hover:text-orange-300 cursor-pointer font-semibold transition-colors duration-300"
         onClick={() => setAboutOpen(true)}
       >
         About

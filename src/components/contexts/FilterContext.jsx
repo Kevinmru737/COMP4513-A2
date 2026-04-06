@@ -56,7 +56,6 @@ const FilterContextProvider = (props) => {
 
   const toggleFilter = (type, value) => {
     const newFilters = { ...filters };
-    console.log("1. toggleFilter called", newFilters);
     const index = newFilters[type].indexOf(value);
     if (index > -1) newFilters[type].splice(index, 1);
     else newFilters[type].push(value);
@@ -74,7 +73,6 @@ const FilterContextProvider = (props) => {
   };
 
   const clearAllFilters = () => {
-    console.log("2. clearAllFilters called");
     const newFilters = { titleSearch: "", years: [], genres: [], artists: [] };
     setFilters(newFilters);
     applyFilters(songData, newFilters);

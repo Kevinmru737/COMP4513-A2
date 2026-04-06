@@ -27,7 +27,7 @@ const AboutView = (props) => {
     <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
       <div className="bg-gray-800 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto text-white">
         <div className="sticky top-0 bg-gray-800 border-b border-gray-700 p-6 flex justify-between items-center">
-          <h1 className="text-3xl font-bold">About Mein Songs</h1>
+          <h1 className="text-3xl font-bold">About OurSongs</h1>
           <button
             onClick={() => setAboutOpen(false)}
             className="text-gray-400 hover:text-white text-2xl cursor-pointer"
@@ -40,7 +40,7 @@ const AboutView = (props) => {
           <section>
             <h2 className="text-2xl font-bold mb-3">Project Overview</h2>
             <p className="text-gray-300 leading-relaxed">
-              Mein Songs is a single-page React application designed to explore
+              Our Songs is a single-page React application designed to explore
               and discover music across different artists, genres, and songs.
               Built with modern web technologies, this application demonstrates
               full-stack development capabilities including frontend design, API
