@@ -1,9 +1,12 @@
 import { CircleMinus } from "lucide-react";
 import { Link } from "react-router-dom";
+import { PlaylistContext } from "./contexts/PlaylistContext";
+import { useContext } from "react";
 
 // shows a playlists songs based on the songs passed to it
 const PlaylistSongCard = ({ songs }) => {
-  const handleAddToPlaylist = () => {};
+  const { selectedPlaylist, removeSongFromPlaylist } =
+    useContext(PlaylistContext);
   return (
     <div>
       {/* Songs List */}
@@ -54,7 +57,9 @@ const PlaylistSongCard = ({ songs }) => {
                 </Link>
               </span>
               <button
-                onClick={() => handleAddToPlaylist(song)}
+                onClick={() =>
+                  removeSongFromPlaylist(selectedPlaylist?.id, song.song_id)
+                }
                 className="shrink-0 ml-auto text-gray-400 hover:text-white transition-colors"
                 aria-label="Add to playlist"
               >

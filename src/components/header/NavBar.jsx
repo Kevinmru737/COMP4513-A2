@@ -9,7 +9,7 @@ const NavBar = (props) => {
   const { setAboutOpen } = useContext(AboutContext);
 
   return (
-    <nav className="flex gap-18 flex-1 justify-center">
+    <nav className="flex gap-18 sm:flex-row items-center flex-1 justify-center">
       <Link
         to="/"
         className="text-white hover:text-orange-300 font-semibold transition-colors duration-300"
@@ -34,20 +34,15 @@ const NavBar = (props) => {
       >
         Songs
       </Link>
-      <button
+      <div
         className="text-white hover:text-orange-300 cursor-pointer font-semibold transition-colors duration-300"
         onClick={() => setAboutOpen(true)}
       >
         About
-      </button>
+      </div>
 
       {/* Show when logged in */}
       {loggedIn && <PlaylistLink />}
-      {loggedIn && (
-        <div className="flex gap-6 items-center shrink-0 pl-6">
-          <span className="text-white font-semibold">Playlists: 5</span>
-        </div>
-      )}
     </nav>
   );
 };

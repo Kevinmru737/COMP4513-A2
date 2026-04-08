@@ -5,15 +5,22 @@ import supabase from "../../../supabase.js";
 import { Spinner } from "@heroui/react";
 import { Trash2 } from "lucide-react";
 import PlaylistSongCard from "../../PlaylistSongCard.jsx";
-
+import { PlaylistContext } from "../../contexts/PlaylistContext.jsx";
 // ── Main component ────────────────────────────────────────────────────────────
 const PlaylistView = () => {
   const { songData, setSongData, setGenreData, setArtistData } =
     useContext(DataContext);
 
-  const [playlistNames, setPlaylistNames] = useState([]);
-  const [playlists, setPlaylists] = useState([]);
-  const [selectedPlaylist, setSelectedPlaylist] = useState(null);
+  const {
+    playlists,
+    playlistNames,
+    setPlaylists,
+    setPlaylistNames,
+    selectedPlaylist,
+    setSelectedPlaylist,
+    getSongCount,
+  } = useContext(PlaylistContext);
+
   const [selectedSongs, setSelectedSongs] = useState([]);
   const [newPlaylistName, setNewPlaylistName] = useState("");
   const [loading, setLoading] = useState(true);
@@ -102,12 +109,6 @@ const PlaylistView = () => {
     }
   };
 
-  const getSongCount = (playlist_id) => {
-    const curr_playlists = playlists.filter(
-      (p) => p.playlist_id === playlist_id,
-    );
-    return curr_playlists.length;
-  };
   // ── Create playlist ─────────────────────────────────────────────────────────
   const handleCreate = async () => {
     if (!newPlaylistName.trim()) return;

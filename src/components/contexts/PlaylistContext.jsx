@@ -1,166 +1,105 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import supabase from "../../supabase";
-import { DataContext } from "./DataContext";
+import { ToastContext } from "../contexts/ToastContext";
 
 export const PlaylistContext = createContext();
 
-export const usePlaylists = () => useContext(PlaylistContext);
+const PlaylistContextProvider = (props) => {
+  const { showToast } = useContext(ToastContext);
 
-export const PlaylistProvider = (props) => {
-  const { songData } = useContext(DataContext);
-  const [playlists, setPlaylists] = useState([]);
   const [playlistNames, setPlaylistNames] = useState([]);
-  const [selectedPlaylist, setSelectedPlaylist] = useState(null);
-  const [selectedSongs, setSelectedSongs] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [playlists, setPlaylists] = useState([]);
+  const [selectedPlaylist, setSelectedPlaylist] = useState([]);
 
-  // ── Fetch playlists and names ───────────────────────────────
-  const fetchPlaylists = async () => {
+  // ── Add song to playlist ────────────────────────────────────────────────
+  const addSongToPlaylist = async (playlistId, songId) => {
     try {
-      setLoading(true);
       const {
         data: { session },
       } = await supabase.auth.getSession();
       const userId = session?.user?.id;
+      if (!userId) throw new Error("User not logged in");
 
-      // Fetch playlist song connections
-      const { data: playlistData, error: playlistError } = await supabase
+      const exists = playlists.some(
+        (p) => p.playlist_id === playlistId && p.song_id === songId,
+      );
+
+      if (exists) {
+        showToast("Already in playlist");
+        return;
+      }
+      // Insert song into the playlists table
+      const { data, error } = await supabase
         .from("playlists")
-        .select("*, playlist:playlist_name(*)")
-        .eq("user_id", userId);
-      if (playlistError) throw new Error(playlistError.message);
-      setPlaylists(playlistData);
+        .upsert([{ playlist_id: playlistId, song_id: songId, user_id: userId }])
+        .select();
 
-      // Fetch playlist names
-      const { data: nameData, error: nameError } = await supabase
-        .from("playlist_name")
-        .select("*")
-        .eq("user_id", userId);
-      if (nameError) throw new Error(nameError.message);
-      setPlaylistNames(nameData);
-    } catch (e) {
-      console.error(e);
-      setError("Failed to load playlists.");
-    } finally {
-      setLoading(false);
+      if (error) {
+        showToast("Error adding to playlist...");
+        throw new Error(error.message);
+      }
+      // Update local state
+      setPlaylists((prev) => [...prev, ...data]);
+      showToast("Song added to Playlist!");
+    } catch (err) {
+      console.error("Failed to add song to playlist:", err.message);
+      throw err; // optional: rethrow so UI can catch
     }
   };
 
-  // ── Select playlist and update songs ───────────────────────
-  const selectPlaylist = (playlist) => {
-    setSelectedPlaylist(playlist);
-    if (!playlist || !songData) return;
-    const songIds = playlists
-      .filter((p) => p.playlist_id === playlist.id)
-      .map((p) => p.song_id);
-    setSelectedSongs(songData.filter((s) => songIds.includes(s.song_id)));
-  };
-
-  // ── Create a new playlist ────────────────────────────────
-  const createPlaylist = async (name) => {
-    if (!name.trim()) return;
+  // ── Remove song from playlist ────────────────────────────────────────────────
+  const removeSongFromPlaylist = async (playlistId, songId) => {
     try {
       const {
         data: { session },
       } = await supabase.auth.getSession();
+
       const userId = session?.user?.id;
+      if (!userId) throw new Error("User not logged in");
 
-      const { data: newPlaylist, error: nameError } = await supabase
-        .from("playlist_name")
-        .insert({ name: name.trim(), user_id: userId })
-        .select()
-        .single();
-      if (nameError) throw new Error(nameError.message);
-
-      setPlaylistNames((prev) => [...prev, newPlaylist]);
-      return newPlaylist;
-    } catch (e) {
-      console.error(e);
-      setError("Failed to create playlist.");
-    }
-  };
-
-  // ── Delete a playlist ───────────────────────────────────
-  const deletePlaylist = async (id) => {
-    try {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-      const userId = session?.user?.id;
-
-      // Delete songs in playlist
-      const { error: songsError } = await supabase
+      // Delete from DB
+      const { error } = await supabase
         .from("playlists")
         .delete()
-        .eq("playlist_id", id)
+        .eq("playlist_id", playlistId)
+        .eq("song_id", songId)
         .eq("user_id", userId);
-      if (songsError) throw new Error(songsError.message);
 
-      // Delete playlist name
-      const { error: nameError } = await supabase
-        .from("playlist_name")
-        .delete()
-        .eq("id", id)
-        .eq("user_id", userId);
-      if (nameError) throw new Error(nameError.message);
+      if (error) {
+        showToast("Error removing from playlist...");
+        throw new Error(error.message);
+      }
 
       // Update local state
-      setPlaylists((prev) => prev.filter((p) => p.playlist_id !== id));
-      setPlaylistNames((prev) => prev.filter((p) => p.id !== id));
-      if (selectedPlaylist?.id === id) {
-        setSelectedPlaylist(null);
-        setSelectedSongs([]);
-      }
-    } catch (e) {
-      console.error(e);
-      setError("Failed to delete playlist.");
-    }
-  };
-
-  // ── Remove a song from the selected playlist ─────────────
-  const removeSongFromPlaylist = async (songId) => {
-    if (!selectedPlaylist) return;
-    try {
-      await supabase
-        .from("playlists")
-        .delete()
-        .eq("playlist_id", selectedPlaylist.id)
-        .eq("song_id", songId);
-
-      const updated = {
-        ...selectedPlaylist,
-        songs:
-          selectedPlaylist.songs?.filter((s) => s.song_id !== songId) || [],
-      };
-      setSelectedPlaylist(updated);
       setPlaylists((prev) =>
-        prev.map((p) => (p.id === updated.id ? updated : p)),
+        prev.filter(
+          (p) => !(p.playlist_id === playlistId && p.song_id === songId),
+        ),
       );
-      setSelectedSongs((prev) => prev.filter((s) => s.id !== songId));
-    } catch (e) {
-      console.error(e);
-      setError("Failed to remove song.");
+
+      showToast("Song removed from playlist!");
+    } catch (err) {
+      console.error("Failed to remove song from playlist:", err.message);
     }
   };
 
-  useEffect(() => {
-    fetchPlaylists();
-  }, []);
-
+  const getSongCount = (playlist_id) => {
+    const curr_playlists = playlists.filter(
+      (p) => p.playlist_id === playlist_id,
+    );
+    return curr_playlists.length;
+  };
   return (
     <PlaylistContext.Provider
       value={{
         playlists,
         playlistNames,
         selectedPlaylist,
-        selectedSongs,
-        loading,
-        error,
-        setError,
-        selectPlaylist,
-        createPlaylist,
-        deletePlaylist,
+        setPlaylistNames,
+        setPlaylists,
+        setSelectedPlaylist,
+        addSongToPlaylist,
+        getSongCount,
         removeSongFromPlaylist,
       }}
     >
@@ -168,3 +107,5 @@ export const PlaylistProvider = (props) => {
     </PlaylistContext.Provider>
   );
 };
+
+export default PlaylistContextProvider;

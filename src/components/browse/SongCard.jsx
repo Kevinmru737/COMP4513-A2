@@ -2,11 +2,12 @@ import { useContext } from "react";
 import { PlusCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { FilterContext } from "../contexts/FilterContext";
+import { PlaylistContext } from "../contexts/PlaylistContext";
 
 // shows all songs in the filtered songs list
 const SongCard = (props) => {
+  const { selectedPlaylist, addSongToPlaylist } = useContext(PlaylistContext);
   // may
-  const handleAddToPlaylist = () => {};
   const { filteredSongs, toggleFilter } = useContext(FilterContext);
   return (
     <div>
@@ -54,14 +55,16 @@ const SongCard = (props) => {
               {/* Genre — right of divider */}
               <span className="text-gray-300 text-sm shrink-0 cursor-pointer hover:underline transition-colors">
                 <Link
-                  to={`/genres/${song.genre.genre_id}`}
+                  to={`/genres/${(selectedPlaylist?.id, song.genre.genre_id)}`}
                   className="hover:underline mb-2"
                 >
                   {song.genre?.genre_name}
                 </Link>
               </span>
               <button
-                onClick={() => handleAddToPlaylist(song)}
+                onClick={() =>
+                  addSongToPlaylist(selectedPlaylist?.id, song.song_id)
+                }
                 className="shrink-0 ml-auto text-gray-400 hover:text-white transition-colors"
                 aria-label="Add to playlist"
               >

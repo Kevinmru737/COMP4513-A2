@@ -9,6 +9,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import AmbientBackground from "../../AmbientBackground";
+import { PlaylistContext } from "../../contexts/PlaylistContext";
 
 const GENRE_COLORS = [
   "from-blue-500 to-blue-900",
@@ -46,7 +47,7 @@ function RelatedSongCard({ song }) {
   return (
     <Link
       to={`/songs/${song.song_id}`}
-      className="flex-shrink-0 w-40 rounded-xl overflow-hidden bg-gray-800 hover:scale-105 transition-transform duration-200 shadow-lg"
+      className="shrink-0 w-40 rounded-xl overflow-hidden bg-gray-800 hover:scale-105 transition-transform duration-200 shadow-lg"
     >
       <div className={`bg-radial ${colorClass} h-20 w-full`} />
       <div className="px-3 py-2">
@@ -62,6 +63,7 @@ function RelatedSongCard({ song }) {
 }
 
 const SingleSongView = () => {
+  const { selectedPlaylist, addSongToPlaylist } = useContext(PlaylistContext);
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
@@ -200,20 +202,12 @@ const SingleSongView = () => {
                   </p>
                 </div>
 
-                <button className="mt-2 w-fit flex items-center gap-2 bg-orange-400 hover:bg-orange-300 text-gray-900 font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors duration-200">
-                  <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <line x1="12" y1="5" x2="12" y2="19" />
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                  </svg>
+                <button
+                  className="mt-2 w-fit flex items-center gap-2 bg-orange-400 hover:bg-orange-300 text-gray-800 font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors duration-200"
+                  onClick={() =>
+                    addSongToPlaylist(selectedPlaylist?.id, song.song_id)
+                  }
+                >
                   Add to Playlist
                 </button>
               </div>

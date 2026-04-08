@@ -19,42 +19,45 @@ import SingleSongView from "./components/pages/views/SingleSongView.jsx";
 import SingleArtistView from "./components/pages/views/SingleArtistView.jsx";
 import SingleGenreView from "./components/pages/views/SingleGenreView.jsx";
 import PlaylistContextProvider from "./components/contexts/PlaylistContext.jsx";
+import ToastContextProvider from "./components/contexts/ToastContext.jsx";
 // inside your JSX, before <Header />
 
 function App() {
   return (
     <div>
-      <AboutContextProvider>
-        <LoginContextProvider>
-          <Header />
-          {/*FilterCP has a dependency on DataCP */}
-          <DataContextProvider>
-            <PlaylistContextProvider>
-              <FilterContextProvider>
-                <Routes>
-                  <Route path="/" element={<HomePage />} />
-                  <Route path="/login" element={<LoginFormView />} />
-                  <Route path="/songs" element={<BrowseView />} />
-                  <Route path="/songs/:songId" element={<SingleSongView />} />
-                  <Route path="/genres" element={<GenreView />} />
-                  <Route
-                    path="/genres/:genreId"
-                    element={<SingleGenreView />}
-                  />
-                  <Route path="/artists" element={<ArtistView />} />
-                  <Route
-                    path="/artists/:artistId"
-                    element={<SingleArtistView />}
-                  />
-                  <Route path="/playlist" element={<PlaylistView />} />
-                </Routes>
-              </FilterContextProvider>
-            </PlaylistContextProvider>
-          </DataContextProvider>
-          <Footer />
-        </LoginContextProvider>
-        <AboutView />
-      </AboutContextProvider>
+      <ToastContextProvider>
+        <AboutContextProvider>
+          <LoginContextProvider>
+            {/*FilterCP has a dependency on DataCP */}
+            <DataContextProvider>
+              <PlaylistContextProvider>
+                <FilterContextProvider>
+                  <Header />
+                  <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/login" element={<LoginFormView />} />
+                    <Route path="/songs" element={<BrowseView />} />
+                    <Route path="/songs/:songId" element={<SingleSongView />} />
+                    <Route path="/genres" element={<GenreView />} />
+                    <Route
+                      path="/genres/:genreId"
+                      element={<SingleGenreView />}
+                    />
+                    <Route path="/artists" element={<ArtistView />} />
+                    <Route
+                      path="/artists/:artistId"
+                      element={<SingleArtistView />}
+                    />
+                    <Route path="/playlist" element={<PlaylistView />} />
+                  </Routes>
+                  <Footer />
+                </FilterContextProvider>
+              </PlaylistContextProvider>
+            </DataContextProvider>
+          </LoginContextProvider>
+          <AboutView />
+        </AboutContextProvider>
+      </ToastContextProvider>
     </div>
   );
 }
