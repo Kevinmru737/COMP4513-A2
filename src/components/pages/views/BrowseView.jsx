@@ -58,49 +58,27 @@ const BrowseView = () => {
         setGenreData(genresRes.data);
         setArtistData(artistsRes.data);
 
-        // filter(Boolean handles null/nan values)
-        setAvailableYears(
-          [...new Set(songsRes.data.map((s) => s.year).filter(Boolean))].sort(
-            (a, b) => a - b,
-          ),
-        );
-        setAvailableGenres(
-          [
-            ...new Set(
-              songsRes.data.map((s) => s.genre?.genre_name).filter(Boolean),
-            ),
-          ].sort(),
-        );
-        setAvailableArtists(
-          [
-            ...new Set(
-              songsRes.data.map((s) => s.artist?.artist_name).filter(Boolean),
-            ),
-          ].sort(),
-        );
         applyFilters(songsRes.data, filters);
       } else {
-        setAvailableYears(
-          [...new Set(songData.map((s) => s.year).filter(Boolean))].sort(
-            (a, b) => a - b,
-          ),
-        );
-        setAvailableGenres(
-          [
-            ...new Set(
-              songData.map((s) => s.genre?.genre_name).filter(Boolean),
-            ),
-          ].sort(),
-        );
-        setAvailableArtists(
-          [
-            ...new Set(
-              songData.map((s) => s.artist?.artist_name).filter(Boolean),
-            ),
-          ].sort(),
-        );
         applyFilters(songData, filters);
       }
+      setAvailableYears(
+        [...new Set(songData.map((s) => s.year).filter(Boolean))].sort(
+          (a, b) => a - b,
+        ),
+      );
+      setAvailableGenres(
+        [
+          ...new Set(songData.map((s) => s.genre?.genre_name).filter(Boolean)),
+        ].sort(),
+      );
+      setAvailableArtists(
+        [
+          ...new Set(
+            songData.map((s) => s.artist?.artist_name).filter(Boolean),
+          ),
+        ].sort(),
+      );
     } catch (err) {
       setError(err.message);
     } finally {

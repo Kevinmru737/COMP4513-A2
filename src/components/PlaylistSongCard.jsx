@@ -1,19 +1,15 @@
-import { useContext } from "react";
-import { PlusCircle } from "lucide-react";
+import { CircleMinus } from "lucide-react";
 import { Link } from "react-router-dom";
-import { FilterContext } from "../contexts/FilterContext";
 
-// shows all songs in the filtered songs list
-const SongCard = (props) => {
-  // may
+// shows a playlists songs based on the songs passed to it
+const PlaylistSongCard = ({ songs }) => {
   const handleAddToPlaylist = () => {};
-  const { filteredSongs, toggleFilter } = useContext(FilterContext);
   return (
     <div>
       {/* Songs List */}
-      {filteredSongs.length > 0 ? (
+      {songs?.length > 0 ? (
         <div className="space-y-4">
-          {filteredSongs.map((song) => (
+          {songs.map((song) => (
             <div
               key={song.song_id}
               className="bg-gray-800 rounded-lg p-4 hover:bg-gray-750 transition-colors flex items-center justify-between gap-4"
@@ -41,10 +37,7 @@ const SongCard = (props) => {
               </div>
 
               {/* Year — left of divider */}
-              <span
-                className="text-gray-400 text-sm shrink-0 cursor-pointer hover:text-white transition-colors"
-                onClick={() => toggleFilter("years", song.year)}
-              >
+              <span className="text-gray-400 text-sm shrink-0 cursor-pointer hover:text-white transition-colors">
                 {song.year}
               </span>
 
@@ -65,7 +58,7 @@ const SongCard = (props) => {
                 className="shrink-0 ml-auto text-gray-400 hover:text-white transition-colors"
                 aria-label="Add to playlist"
               >
-                <PlusCircle size={30} />
+                <CircleMinus size={30} />
               </button>
 
               {/* Duration */}
@@ -79,7 +72,7 @@ const SongCard = (props) => {
       ) : (
         <div className="text-center py-12">
           <p className="text-gray-400 text-xl mb-4">
-            No songs match your filters
+            Problem fetching playlist songs.
           </p>
         </div>
       )}
@@ -87,4 +80,4 @@ const SongCard = (props) => {
   );
 };
 
-export default SongCard;
+export default PlaylistSongCard;

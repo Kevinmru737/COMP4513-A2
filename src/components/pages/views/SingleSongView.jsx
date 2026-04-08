@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { DataContext } from "../../contexts/DataContext";
 import {
@@ -62,6 +62,9 @@ function RelatedSongCard({ song }) {
 }
 
 const SingleSongView = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
   const { songId } = useParams();
   const { songData, artistData } = useContext(DataContext);
 
@@ -159,7 +162,7 @@ const SingleSongView = () => {
                     Genre
                   </p>
                   <Link
-                    to="/genres"
+                    to={`/genres/${song.genre.genre_id}`}
                     className="inline-block rounded-xl overflow-hidden hover:scale-105 transition-transform duration-200 shadow-md"
                   >
                     <div className={`bg-radial ${genreColorClass} h-12 w-36`} />
@@ -186,6 +189,15 @@ const SingleSongView = () => {
                       {song.popularity}/100
                     </span>
                   </div>
+                </div>
+
+                <div>
+                  <p className="text-gray-500 text-xs tracking-widest uppercase mb-2">
+                    Loudness:{" "}
+                    <span className="text-gray-400 text-xs">
+                      {song.loudness} DB
+                    </span>
+                  </p>
                 </div>
 
                 <button className="mt-2 w-fit flex items-center gap-2 bg-orange-400 hover:bg-orange-300 text-gray-900 font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors duration-200">

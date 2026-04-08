@@ -45,7 +45,6 @@ const FilterContextProvider = (props) => {
         currentFilters.artists.includes(s.artist.artist_name),
       );
     }
-
     setFilteredSongs(result);
   };
   const handleTitleChange = (e) => {
@@ -63,6 +62,18 @@ const FilterContextProvider = (props) => {
     if (songData.length > 0) {
       applyFilters(songData, newFilters);
     }
+  };
+
+  const setFilter = (type, value) => {
+    const newFilters = {
+      titleSearch: "",
+      years: [],
+      genres: [],
+      artists: [],
+      [type]: [value],
+    };
+    setFilters(newFilters);
+    if (songData.length > 0) applyFilters(songData, newFilters);
   };
 
   const removeFilter = (type, value) => {
@@ -85,6 +96,7 @@ const FilterContextProvider = (props) => {
         setFilteredSongs,
         filters,
         setFilters,
+        setFilter,
         clearAllFilters,
         toggleFilter,
         removeFilter,
