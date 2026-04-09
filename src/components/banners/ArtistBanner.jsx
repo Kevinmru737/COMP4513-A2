@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { DataContext } from "../contexts/DataContext"; // update path to match your project
+import { DataContext } from "../contexts/DataContext";
 
 const SpotifyIcon = () => (
   <svg width="13" height="13" viewBox="0 0 24 24" fill="white">
@@ -7,7 +7,6 @@ const SpotifyIcon = () => (
   </svg>
 );
 
-// boilerplate given by claude.ai for styling
 const ArtistBanner = () => {
   const { artistData } = useContext(DataContext);
   const [current, setCurrent] = useState(0);
@@ -21,12 +20,13 @@ const ArtistBanner = () => {
 
   return (
     <div className="bg-gray-800 shadow-2xl max-w-6xl mx-auto rounded-2xl overflow-hidden">
+      {/* Changed: flex-col on mobile, flex-row on md+ */}
       <div
-        className="relative flex items-stretch min-h-65"
+        className="relative flex flex-col md:flex-row items-stretch"
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
-        {/* Left — heading */}
-        <div className="flex-1 flex flex-col justify-center gap-2 px-12 py-12 relative z-10">
+        {/* Left — heading. Reduced padding on mobile */}
+        <div className="flex-1 flex flex-col justify-center gap-2 px-6 py-8 md:px-12 md:py-12 relative z-10">
           <div className="flex items-center gap-2 mb-1">
             <div className="w-7 h-0.5 bg-orange-400 rounded-full" />
             <span className="text-orange-400 text-xs font-normal tracking-widest uppercase">
@@ -38,7 +38,7 @@ const ArtistBanner = () => {
             className="text-gray-50 leading-none m-0"
             style={{
               fontFamily: "'Bebas Neue', sans-serif",
-              fontSize: "clamp(52px, 7vw, 82px)",
+              fontSize: "clamp(42px, 7vw, 82px)",
               letterSpacing: "0.02em",
             }}
           >
@@ -52,17 +52,17 @@ const ArtistBanner = () => {
           </p>
         </div>
 
-        {/* Vertical divider */}
+        {/* Divider: horizontal on mobile, vertical on md+ */}
         <div
-          className="shrink-0 w-px my-8 relative z-10"
+          className="md:shrink-0 md:w-px md:my-8 h-px md:h-auto mx-6 md:mx-0 relative z-10"
           style={{
             background:
-              "linear-gradient(to bottom, transparent, #374151 30%, #374151 70%, transparent)",
+              "linear-gradient(to right, transparent, #374151 30%, #374151 70%, transparent)",
           }}
         />
 
-        {/* Right — artist card */}
-        <div className="w-96 shrink-0 flex flex-col justify-center gap-3 px-8 py-9 relative z-10">
+        {/* Right — artist card. Full width on mobile, fixed width on md+ */}
+        <div className="w-full md:w-96 md:shrink-0 flex flex-col justify-center gap-3 px-6 py-6 md:px-8 md:py-9 relative z-10">
           {/* Header row */}
           <div className="flex items-center justify-between">
             <span className="text-gray-500 text-[16px] font-medium tracking-[0.18em] uppercase">

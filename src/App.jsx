@@ -20,6 +20,7 @@ import SingleArtistView from "./components/pages/views/SingleArtistView.jsx";
 import SingleGenreView from "./components/pages/views/SingleGenreView.jsx";
 import PlaylistContextProvider from "./components/contexts/PlaylistContext.jsx";
 import ToastContextProvider from "./components/contexts/ToastContext.jsx";
+import MobileHeader from "./components/header/MobileHeader.jsx";
 // inside your JSX, before <Header />
 
 function App() {
@@ -32,7 +33,12 @@ function App() {
             <DataContextProvider>
               <PlaylistContextProvider>
                 <FilterContextProvider>
-                  <Header />
+                  <div className="hidden md:block">
+                    <Header />
+                  </div>
+                  <div className="block md:hidden">
+                    <MobileHeader />
+                  </div>
                   <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/login" element={<LoginFormView />} />

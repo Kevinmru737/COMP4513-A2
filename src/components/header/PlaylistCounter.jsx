@@ -17,9 +17,9 @@ const PlaylistCounter = (props) => {
         </span>
       </div>
       <Badge.Anchor>
-        <span className="m-2  mb-6"></span>
+        <span className="m-2 mb-6"></span>
         {selectedPlaylist?.name && (
-          <Badge variant="primary" color="warning" size="lg">
+          <Badge variant="primary" color="warning" size="md">
             {getSongCount(selectedPlaylist.id)}
           </Badge>
         )}
