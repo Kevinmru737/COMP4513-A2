@@ -4,6 +4,8 @@ Kevin Oh
 
 Developed using Vite, React, Supabase and other component libraries attributed in LICENSES.
 
+Visit the site: https://kevinmru737.github.io/COMP4513-A2/
+
 ## AI Acknowledgements
 
 This project was developed with assistance from Claude (Anthropic), especially for styling.
