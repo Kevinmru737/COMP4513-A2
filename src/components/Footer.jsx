@@ -49,7 +49,7 @@ const Footer = (props) => {
         </div>
 
         <div className="text-center text-gray-400">
-          <p>&copy; {currentYear} Mein Songs. All rights reserved.</p>
+          <p>{currentYear} OurSongs. All rights reserved.</p>
           <p className="text-sm mt-2">
             Built with React, Vite, and Tailwind CSS
           </p>

@@ -12,7 +12,8 @@ const FilterSidebar = (props) => {
   } = useContext(FilterContext);
 
   return (
-    <div className="bg-gray-800 rounded-lg p-6 sticky top-30">
+    <div className="bg-gray-800 rounded-lg p-6 sticky top-30 max-h-[calc(100vh-7.5rem)] overflow-y-auto">
+      {" "}
       <h2 className="text-2xl font-bold text-white mb-6">Filters</h2>
       {/* Title Search */}
       <div className="mb-8">
@@ -27,7 +28,6 @@ const FilterSidebar = (props) => {
           className="w-full px-3 py-2 bg-gray-700 text-white rounded border border-gray-600 focus:border-blue-500 outline-none"
         />
       </div>
-
       {/* Years */}
       <div className="mb-8">
         <label className="block text-white font-bold mb-3">Years</label>
@@ -55,7 +55,6 @@ const FilterSidebar = (props) => {
           ))}
         </div>
       </div>
-
       {/* Genres */}
       <div className="mb-8">
         <label className="block text-white font-bold mb-3">Genres</label>
@@ -83,7 +82,6 @@ const FilterSidebar = (props) => {
           ))}
         </div>
       </div>
-
       {/* Artists */}
       <div>
         <label className="block text-white font-bold mb-3">Artists</label>

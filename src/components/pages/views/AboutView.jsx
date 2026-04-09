@@ -97,6 +97,26 @@ const AboutView = (props) => {
           </section>
 
           <section>
+            <h2 className="text-2xl font-bold mb-3">Made By</h2>
+            <ul className="text-gray-300 space-y-2">
+              <li>
+                • <strong>Kevin Oh</strong>
+              </li>
+              <li>
+                • <strong>Email: </strong> koh705@mtroyal.ca
+              </li>
+              <li>
+                • <strong>GitHub: </strong>{" "}
+                <a
+                  className="hover:underline hover:text-blue-400"
+                  href="https://github.com/Kevinmru737"
+                >
+                  https://github.com/Kevinmru737
+                </a>
+              </li>
+            </ul>
+          </section>
+          <section>
             <h2 className="text-2xl font-bold mb-3">Attribution</h2>
             <p className="text-gray-300 mb-3">
               This project uses external resources and libraries. All
