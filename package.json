@@ -1,12 +1,12 @@
 {
   "name": "comp4513-a2",
-  "homepage": "https://OurSongs.github.io",
+  "homepage": "https://github.com/Kevinmru737/COMP4513-A2",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
