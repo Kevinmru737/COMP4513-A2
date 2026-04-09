@@ -21,9 +21,10 @@ import SingleGenreView from "./components/pages/views/SingleGenreView.jsx";
 import PlaylistContextProvider from "./components/contexts/PlaylistContext.jsx";
 import ToastContextProvider from "./components/contexts/ToastContext.jsx";
 import MobileHeader from "./components/header/MobileHeader.jsx";
-// inside your JSX, before <Header />
+import useIsMobile from "./components/IsMobile";
 
 function App() {
+  const isMobile = useIsMobile();
   return (
     <div>
       <ToastContextProvider>
@@ -33,12 +34,7 @@ function App() {
             <DataContextProvider>
               <PlaylistContextProvider>
                 <FilterContextProvider>
-                  <div className="hidden md:block">
-                    <Header />
-                  </div>
-                  <div className="block md:hidden">
-                    <MobileHeader />
-                  </div>
+                  {isMobile ? <MobileHeader /> : <Header />}
                   <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/login" element={<LoginFormView />} />
