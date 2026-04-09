@@ -61,7 +61,6 @@ const PlaylistView = () => {
         throw new Error(supabaseError.message);
       }
       setPlaylists(combData);
-      console.log(combData);
 
       const { data: nameData, error: nameSBError } = await supabase
         .from("playlist_name")
@@ -104,7 +103,6 @@ const PlaylistView = () => {
     } catch (err) {
       setError(err.message);
     } finally {
-      // was having an issue with ActiveFilters not populating correctly, tells it to re-render
       setLoading(false);
     }
   };
@@ -129,6 +127,7 @@ const PlaylistView = () => {
       if (nameError) throw new Error(nameError.message);
 
       setPlaylistNames((prev) => [...prev, newPlaylist]);
+      setSelectedPlaylist(newPlaylist);
       setNewPlaylistName("");
     } catch (e) {
       setError("Failed to create playlist.");
@@ -173,24 +172,6 @@ const PlaylistView = () => {
     } catch (e) {
       console.error(e);
       setError("Failed to delete playlist.");
-    }
-  };
-
-  // ── Remove song from playlist ───────────────────────────────────────────────
-  const handleRemoveSong = async (songId) => {
-    if (!selectedPlaylist) return;
-    try {
-      await api.removeSongFromPlaylist(selectedPlaylist.id, songId);
-      const updated = {
-        ...selectedPlaylist,
-        songs: selectedPlaylist.songs.filter((s) => s.song_id !== songId),
-      };
-      setSelectedPlaylist(updated);
-      setPlaylists((prev) =>
-        prev.map((p) => (p.id === updated.id ? updated : p)),
-      );
-    } catch (e) {
-      setError("Failed to remove song.");
     }
   };
 

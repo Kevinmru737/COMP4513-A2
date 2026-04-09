@@ -2,8 +2,10 @@ import { Link } from "react-router-dom";
 import { LoginContext } from "../contexts/LoginContextProvider";
 import { useContext } from "react";
 import supabase from "../../supabase";
+import { PlaylistContext } from "../contexts/PlaylistContext";
 const LoginLink = (props) => {
   const [loggedIn, setLoggedIn] = useContext(LoginContext);
+  const { resetPlaylistContext } = useContext(PlaylistContext);
 
   const handleLogOut = async () => {
     const { error } = await supabase.auth.signOut();
@@ -11,6 +13,7 @@ const LoginLink = (props) => {
       throw new Error(error.message);
     } else {
       setLoggedIn(false);
+      resetPlaylistContext();
     }
   };
   return loggedIn ? (

@@ -11,12 +11,6 @@ const FilterSidebar = (props) => {
     availableGenres,
   } = useContext(FilterContext);
 
-  const hasActiveFilters =
-    filters.titleSearch ||
-    filters.years.length > 0 ||
-    filters.genres.length > 0 ||
-    filters.artists.length > 0;
-
   return (
     <div className="bg-gray-800 rounded-lg p-6 sticky top-30">
       <h2 className="text-2xl font-bold text-white mb-6">Filters</h2>

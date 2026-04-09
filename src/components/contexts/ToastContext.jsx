@@ -6,7 +6,7 @@ const ToastContextProvider = (props) => {
   const [message, setMessage] = useState("");
   const [visible, setVisible] = useState(false);
 
-  const showToast = (msg, duration = 2000) => {
+  const showToast = (msg, duration = 1000) => {
     setMessage(msg);
     setVisible(true);
     setTimeout(() => setVisible(false), duration);

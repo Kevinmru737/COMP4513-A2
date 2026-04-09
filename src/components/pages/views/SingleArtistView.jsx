@@ -85,7 +85,7 @@ const SingleArtistView = () => {
                   rel="noreferrer"
                   className="w-fit flex items-center gap-2 bg-gray-900 hover:border-green-500 border border-gray-700 rounded-lg px-3 py-2 transition-colors"
                 >
-                  <div className="w-5 h-5 rounded-full bg-[#1DB954] flex items-center justify-center flex-shrink-0">
+                  <div className="w-5 h-5 rounded-full bg-[#1DB954] flex items-center justify-center shrink-0">
                     <svg
                       width="11"
                       height="11"

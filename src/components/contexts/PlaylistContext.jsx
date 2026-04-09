@@ -1,18 +1,28 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import supabase from "../../supabase";
 import { ToastContext } from "../contexts/ToastContext";
-
+import { LoginContext } from "./LoginContextProvider";
 export const PlaylistContext = createContext();
 
 const PlaylistContextProvider = (props) => {
   const { showToast } = useContext(ToastContext);
+  const [loggedIn] = useContext(LoginContext);
 
   const [playlistNames, setPlaylistNames] = useState([]);
   const [playlists, setPlaylists] = useState([]);
   const [selectedPlaylist, setSelectedPlaylist] = useState([]);
 
+  const resetPlaylistContext = () => {
+    setPlaylistNames([]);
+    setPlaylists([]);
+    setSelectedPlaylist([]);
+  };
   // ── Add song to playlist ────────────────────────────────────────────────
   const addSongToPlaylist = async (playlistId, songId) => {
+    if (!loggedIn) {
+      showToast("Please log in to use playlist features");
+      return;
+    }
     try {
       const {
         data: { session },
@@ -101,6 +111,7 @@ const PlaylistContextProvider = (props) => {
         addSongToPlaylist,
         getSongCount,
         removeSongFromPlaylist,
+        resetPlaylistContext,
       }}
     >
       {props.children}

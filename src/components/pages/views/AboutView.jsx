@@ -40,11 +40,11 @@ const AboutView = (props) => {
           <section>
             <h2 className="text-2xl font-bold mb-3">Project Overview</h2>
             <p className="text-gray-300 leading-relaxed">
-              Our Songs is a single-page React application designed to explore
+              OurSongs is a single-page React application designed to explore
               and discover music across different artists, genres, and songs.
-              Built with modern web technologies, this application demonstrates
-              full-stack development capabilities including frontend design, API
-              integration, and user authentication.
+              This application demonstrates full-stack development capabilities
+              including frontend design, backend database management, and user
+              authentication.
             </p>
           </section>
 
@@ -52,8 +52,8 @@ const AboutView = (props) => {
             <h2 className="text-2xl font-bold mb-3">Features</h2>
             <ul className="text-gray-300 space-y-2">
               <li>
-                • <strong>Browse Artists:</strong> Explore a curated collection
-                of musicians and performers
+                • <strong>Browse Artists:</strong> Explore a collection of
+                musicians and performers
               </li>
               <li>
                 • <strong>Discover Genres:</strong> Filter music by genre to
@@ -88,10 +88,10 @@ const AboutView = (props) => {
                 • <strong>Styling:</strong> Tailwind CSS
               </li>
               <li>
-                • <strong>Routing:</strong> React Router DOM
+                • <strong>Database:</strong> Supabase
               </li>
               <li>
-                • <strong>Database:</strong> Supabase
+                • <strong>User Authentication:</strong> Supabase
               </li>
             </ul>
           </section>
@@ -101,37 +101,8 @@ const AboutView = (props) => {
             <p className="text-gray-300 mb-3">
               This project uses external resources and libraries. All
               third-party code is properly credited and licensed according to
-              their respective terms.
+              their respective terms. See LICENSE for more details.
             </p>
-            <ul className="text-gray-300 space-y-2">
-              <li>
-                • React -{" "}
-                <a
-                  href="https://react.dev"
-                  className="text-blue-400 hover:text-blue-300"
-                >
-                  https://react.dev
-                </a>
-              </li>
-              <li>
-                • Tailwind CSS -{" "}
-                <a
-                  href="https://tailwindcss.com"
-                  className="text-blue-400 hover:text-blue-300"
-                >
-                  https://tailwindcss.com
-                </a>
-              </li>
-              <li>
-                • Vite -{" "}
-                <a
-                  href="https://vitejs.dev"
-                  className="text-blue-400 hover:text-blue-300"
-                >
-                  https://vitejs.dev
-                </a>
-              </li>
-            </ul>
           </section>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { PlaylistContext } from "../contexts/PlaylistContext.jsx";
+import { Badge } from "@heroui/react";
 import { useContext } from "react";
 const PlaylistCounter = (props) => {
   const { selectedPlaylist, setSelectedPlaylist, getSongCount } =
@@ -15,9 +16,15 @@ const PlaylistCounter = (props) => {
           {selectedPlaylist?.name ? selectedPlaylist.name : "None"}
         </span>
       </div>
-      <div className=" text-orange-400 rounded-full flex items-center justify-center text-basic font-bold>">
-        {selectedPlaylist?.name ? getSongCount(selectedPlaylist.id) : ""}
-      </div>
+      <Badge.Anchor>
+        <span className="m-2  mb-6"></span>
+        {selectedPlaylist?.name && (
+          <Badge variant="primary" color="warning" size="lg">
+            {getSongCount(selectedPlaylist.id)}
+          </Badge>
+        )}
+      </Badge.Anchor>
+      <div className="mr-4"></div>
     </div>
   );
 };

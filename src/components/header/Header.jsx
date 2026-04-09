@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import reactLogo from "../../assets/react.svg";
+import ourSongsLogo from "../../assets/OurSongs Logo ChatGPT.png";
 import LoginLink from "./LoginLink.jsx";
 import NavBar from "./NavBar.jsx";
 import PlaylistCounter from "./PlaylistCounter.jsx";
@@ -8,6 +8,7 @@ import { LoginContext } from "../contexts/LoginContextProvider.jsx";
 
 const Header = (props) => {
   const [loggedIn] = useContext(LoginContext);
+
   return (
     <header className="sticky top-0 z-50 bg-black border-b-4 py-4">
       <div className="relative flex items-center sm:px-8 md:px-16">
@@ -16,7 +17,7 @@ const Header = (props) => {
           to="/"
           className="text-4xl font-bold text-gray-300 hover:text-yellow-300 transition-colors duration-300"
         >
-          <img src={reactLogo} alt="Logo" className="h-10 w-10" />
+          <img src={ourSongsLogo} alt="Logo" className="w-40 rounded-4xl" />
         </Link>
 
         {/* NavBar centered */}
