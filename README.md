@@ -16,6 +16,6 @@ See the Apps "about" view for more information
 
 ## AI Acknowledgements
 
-This project was developed with assistance from Claude (Anthropic), especially for styling.
+This project was developed with assistance from Claude (Anthropic), particularly for styling.
 
 OurSongs homepage logo was created by ChatGPT.
